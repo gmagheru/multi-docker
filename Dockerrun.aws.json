@@ -1,0 +1,36 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "gmagheru/multi-client",
+            "hostname": "client-component",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "gmagheru/multi-server",
+            "hostname": "server-component",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "gmagheru/multi-worker",
+            "hostname": "worker-component",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "gmagheru/multi-nginx",
+            "hostname": "nginx-component",
+            "essential": true,
+            "portMappings" : [
+                {
+                    "hostPort" : 80,
+                    "containerPort" : 80
+                }
+            ],
+            "links" : ["client", "server"]
+        }
+    ]
+}
